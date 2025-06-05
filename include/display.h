@@ -13,6 +13,7 @@ class Display {
         Display();
         void setup();
         void showTemperature(float temp);
+        void wifiStatus(bool status);
     private:
         // Create display object (I2C address 0x3C, reset pin not used)
         Adafruit_SH1106 *display = nullptr;    

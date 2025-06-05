@@ -31,3 +31,12 @@ void Display::showTemperature(float temp) {
   display->printf("%.1f C", temp);
   display->display();
 }
+
+void Display::wifiStatus(bool status)
+{
+  display->setTextSize(1);
+  display->setTextColor(WHITE);
+  display->setCursor(0, 48);
+  display->printf("WiFi: %s", status ? "ok" : "err");
+  display->display();
+}

@@ -21,12 +21,17 @@
     #define DEBUG_PRINTF(...) ;
 #endif
 
-Display dsp;
 #define DRDY_PIN 35
 #define SCK_PIN 18
 #define MOSI_PIN 23
 #define MISO_PIN 19
 #define CS_PIN 27
+
+#define MAX_TEMPERATURE 200.0
+#define RELAY_PIN 4
+
+Display dsp;
+
 float temperature = 0.0;
 Adafruit_MAX31856 maxthermo = Adafruit_MAX31856(CS_PIN);
 

@@ -5,6 +5,7 @@ void setup() {
     Serial.begin(115200);
   #endif
   pinMode(DRDY_PIN, INPUT);
+  pinMode(RELAY_PIN, OUTPUT);
   dsp.setup();
   if (!maxthermo.begin()) {
     DEBUG_PRINTLN("Could not initialize thermocouple.");
@@ -33,6 +34,9 @@ void setup() {
   setup_wifi();
   if (WiFi.status() == WL_CONNECTED) {
     TemperatureWebsite.begin();
+    dsp.wifiStatus(true);
+  } else {
+    dsp.wifiStatus(false);
   }
 }
 
@@ -49,6 +53,13 @@ void loop() {
   DEBUG_PRINT("Temperature: ");
   DEBUG_PRINTLN(temperature);
   dsp.showTemperature(temperature);
+  dsp.wifiStatus(WiFi.status() == WL_CONNECTED);
+
+  if (temperature > MAX_TEMPERATURE) {
+    digitalWrite(RELAY_PIN, HIGH);
+  } else {
+    digitalWrite(RELAY_PIN, LOW);
+  }
 
   if (WiFi.status() == WL_CONNECTED && (millis() - websiteTimestamp > 1000)) {
     websiteTimestamp = millis();
