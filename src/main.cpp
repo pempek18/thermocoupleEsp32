@@ -29,15 +29,31 @@ void setup() {
   }
 
   maxthermo.setConversionMode(MAX31856_CONTINUOUS);  
+  flash.setup();
+  setup_wifi();
+  if (WiFi.status() == WL_CONNECTED) {
+    TemperatureWebsite.begin();
+  }
 }
 
 void loop() {
+  int cnt = 0 ;
   while (digitalRead(DRDY_PIN)) {
     delay(1);
+    cnt ++ ;
+    if (cnt > 1000) 
+      dsp.showTemperature(0.0);
   }  
   DEBUG_PRINTLN("Conversion complete");
-  float temperature = maxthermo.readThermocoupleTemperature();
+  temperature = maxthermo.readThermocoupleTemperature();
   DEBUG_PRINT("Temperature: ");
   DEBUG_PRINTLN(temperature);
   dsp.showTemperature(temperature);
+
+  if (WiFi.status() == WL_CONNECTED && (millis() - websiteTimestamp > 1000)) {
+    websiteTimestamp = millis();
+    TemperatureWebsite.prepareXML();
+    TemperatureWebsite.refresh();
+  }
+  delay(500);
 }

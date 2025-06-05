@@ -1,8 +1,11 @@
 #ifndef MAIN_H
 #define MAIN_H
 #include <Arduino.h>
-#include "display.h"
 #include <Adafruit_MAX31856.h>
+#include "display.h"
+#include "Website.h"
+#include "Wifi_control.h"
+#include "FlashManager.h"
 
 #define DEBUG_SERIAL 1
 #ifndef DEBUG_SERIAL
@@ -24,6 +27,28 @@ Display dsp;
 #define MOSI_PIN 23
 #define MISO_PIN 19
 #define CS_PIN 27
-
+float temperature = 0.0;
 Adafruit_MAX31856 maxthermo = Adafruit_MAX31856(CS_PIN);
+
+Wifi_control wifiCtrl;
+FlashManager flash;
+unsigned long websiteTimestamp = 0;
+class MyWebsite : public Website
+{
+public:
+  MyWebsite(int port) : Website(port) {};
+  void prepareXML()
+  {
+    xmlHeader(1);
+    xmlTemperature(999, "Temperature", temperature);
+    strcat(XML, "</Data>\n");
+  }
+};
+MyWebsite TemperatureWebsite(80);
+
+void setup_wifi()
+{
+  vTaskDelay(500 / portTICK_PERIOD_MS);
+  wifiCtrl.TestSavedWifiConfig();
+}
 #endif

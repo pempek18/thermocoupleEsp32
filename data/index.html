@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" class="js-focus-visible">
+    <head>
+        <title>TEMPERATURE MONITOR</title>
+        <link rel="icon" href="data:,">
+        <link rel="stylesheet" type="text/css" href="style.css">        
+    </head>
+    <body style="background-color: #efefef" onload="process()">
+        <header>
+          <div class="navbar fixed-top">
+              <div class="container">
+                <div class="navtitle">TEMPERATURE</div>
+                <div class="navdata" id = "date">mm/dd/yyyy</div>
+                <div class="navheading">DATE</div><br>
+                <div class="navdata" id = "time">00:00:00</div>
+                <div class="navheading">TIME</div>
+              </div>
+          </div>
+        </header>    
+        <main class="container" style="margin-top:80px">
+          <table>
+            <tr>
+              <td>
+                <h2 class="sectionHeading">OSTATNI ODCZYT</h2>  
+              </td>
+            </tr>
+          </table>
+          <table class="table">
+            <tr>
+              <th>
+                <div class="heading">Nickname</div>
+              </th>
+              <th>
+                <div class="heading">TEMPERATURE</div>
+              </th>
+              <th colspan="1">
+                <div class="heading">OPTIONS</div>
+              </th>              
+            </tr>
+              <tr>
+                <td class="record">
+                  <input type='text' name='txbChange_999' placeholder='New Nickname' id="txbChange_999" class="txbNickname">
+                </td>
+                <td>
+                  <label id="lblTime_999" oninput="Update_lblTime_999(this.value)">0.0*C</label>
+                </td>              
+            </tr>
+          </table>
+        </main>
+    </body>
+    <script src="script.js" type="text/javascript"></script>
+</html>
