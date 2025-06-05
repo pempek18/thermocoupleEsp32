@@ -10,7 +10,11 @@ void Display::setup() {
   display->setTextSize(2);
   display->setTextColor(WHITE);
   display->setCursor(0, 0);
-  display->println("Temperatura");
+  display->println("Temp:");
+  display->setTextSize(2);
+  display->setCursor(0, 24);
+  display->setTextSize(3);
+  display->printf("%.1f C", 0.0);
   display->display();
   delay(1000);
 }
