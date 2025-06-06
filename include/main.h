@@ -7,7 +7,7 @@
 #include "Wifi_control.h"
 #include "FlashManager.h"
 
-#define DEBUG_SERIAL 1
+#define DEBUG_SERIAL 0
 #ifndef DEBUG_SERIAL
 #define DEBUG_SERIAL 0
 #endif
