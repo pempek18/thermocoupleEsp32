@@ -1,4 +1,4 @@
-#include "Display.h"
+#include "display.h"
 
 Display::Display() {
     display = new Adafruit_SH1106(OLED_RESET);

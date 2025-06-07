@@ -55,8 +55,9 @@ void loop() {
   DEBUG_PRINTLN(temperature);
   dsp.showTemperature(temperature);
   dsp.wifiStatus(WiFi.status() == WL_CONNECTED);
-
-  if (temperature >= MAX_TEMPERATURE) {
+  DEBUG_PRINT("Fault: ");
+  DEBUG_PRINTLN(maxthermo.readFault());
+  if (temperature >= MAX_TEMPERATURE && maxthermo.readFault() == 0) {
     DEBUG_PRINTLN("Temperature too high");
     digitalWrite(RELAY_PIN, LOW);
   } else {
